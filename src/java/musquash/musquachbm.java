@@ -6,6 +6,7 @@
 package musquash;
 
 import classdb.Client;
+import classdb.Reservation;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,8 @@ import javax.faces.bean.RequestScoped;
 public class musquachbm {
 
     private Connexion maconnexion = new Connexion();
-    private List <Client> resultat = new ArrayList<>();
+    private List <Client> clients = new ArrayList<>();
+    private List <Reservation> reservations = new ArrayList<>();
 
     /**
      * Creates a new instance of musquachbm
@@ -31,7 +33,12 @@ public class musquachbm {
 
     public void listedeclient() throws SQLException  {
 
-        resultat = maconnexion.RequeteSelectClient();
+        setClients(maconnexion.RequeteSelectClient());
+    }
+    
+    public void listedereservation() throws SQLException  {
+
+        setReservations(maconnexion.RequeteSelectReservation());
     }
 
 
@@ -53,14 +60,42 @@ public class musquachbm {
      * @return the resultat
      */
     public List <Client> getResultat() {
-        return resultat;
+        return getClients();
     }
 
     /**
      * @param resultat the resultat to set
      */
     public void setResultat(List <Client> resultat) {
-        this.resultat = resultat;
+        this.setClients(resultat);
+    }
+
+    /**
+     * @return the clients
+     */
+    public List <Client> getClients() {
+        return clients;
+    }
+
+    /**
+     * @param clients the clients to set
+     */
+    public void setClients(List <Client> clients) {
+        this.clients = clients;
+    }
+
+    /**
+     * @return the reservations
+     */
+    public List <Reservation> getReservations() {
+        return reservations;
+    }
+
+    /**
+     * @param reservations the reservations to set
+     */
+    public void setReservations(List <Reservation> reservations) {
+        this.reservations = reservations;
     }
     
 }
