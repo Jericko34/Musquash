@@ -10,7 +10,7 @@ package classdb;
  * @author Benjamin
  */
 public class Reservation {
-    private int DATE;
+    private String DATE;
     private int HEUREDEBUT;
     private int HEUREFIN;
     private int IDPROF;
@@ -19,17 +19,28 @@ public class Reservation {
     private int IDCOURCOLLECTIF;
     private int TYPEACTIVITE;
 
+    public Reservation(String DATE, int HEUREDEBUT, int HEUREFIN, int IDPROF, int IDRESERVATION, int IDSALLE, int IDCOURCOLLECTIF, int TYPEACTIVITE) {
+        this.DATE = DATE;
+        this.HEUREDEBUT = HEUREDEBUT;
+        this.HEUREFIN = HEUREFIN;
+        this.IDPROF = IDPROF;
+        this.IDRESERVATION = IDRESERVATION;
+        this.IDSALLE = IDSALLE;
+        this.IDCOURCOLLECTIF = IDCOURCOLLECTIF;
+        this.TYPEACTIVITE = TYPEACTIVITE;
+    }
+
     /**
      * @return the DATE
      */
-    public int getDATE() {
+    public String getDATE() {
         return DATE;
     }
 
     /**
      * @param DATE the DATE to set
      */
-    public void setDATE(int DATE) {
+    public void setDATE(String DATE) {
         this.DATE = DATE;
     }
 
