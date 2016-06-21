@@ -29,7 +29,7 @@ public class musquachbm {
     public musquachbm() {
     }
 
-    public void RequeteClient() throws SQLException {
+    public void listedeclient() throws SQLException {
         try {
         resultat = maconnexion.RequeteSelectClient();
         } catch (SQLException e){e.printStackTrace();}
