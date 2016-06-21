@@ -30,7 +30,6 @@ public class musquachbm {
     }
 
     public void initconnexion() {
-        setResultat(maconnexion.LancerLaConnexion());
     }
 
 

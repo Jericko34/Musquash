@@ -27,7 +27,7 @@ public class Connexion {
     private List <Client> rep = new ArrayList<>();
     private List <Client> clients = new ArrayList<>();
 
-    public List<Client> LancerLaConnexion() {
+    public void LancerLaConnexion() {
         try {
 
             Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -59,16 +59,9 @@ public class Connexion {
         } else {
             System.out.println("Failed to make connection!");
         }
-        try {
-            rep = this.RequeteSelect();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return rep;
-
     }
 
-    public List<Client> RequeteSelect() throws SQLException {
+    public List<Client> RequeteSelectClient() throws SQLException {
         Statement requ = maconnec.createStatement();
         ResultSet request = null;
         String vNOMCLIENT;
