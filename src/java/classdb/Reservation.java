@@ -11,15 +11,15 @@ package classdb;
  */
 public class Reservation {
     private String DATE;
-    private int HEUREDEBUT;
-    private int HEUREFIN;
+    private String HEUREDEBUT;
+    private String HEUREFIN;
     private int IDPROF;
     private int IDRESERVATION;
     private int IDSALLE;
     private int IDCOURCOLLECTIF;
     private int TYPEACTIVITE;
 
-    public Reservation(String DATE, int HEUREDEBUT, int HEUREFIN, int IDPROF, int IDRESERVATION, int IDSALLE, int IDCOURCOLLECTIF, int TYPEACTIVITE) {
+    public Reservation(String DATE, String HEUREDEBUT, String HEUREFIN, int IDPROF, int IDRESERVATION, int IDSALLE, int IDCOURCOLLECTIF, int TYPEACTIVITE) {
         this.DATE = DATE;
         this.HEUREDEBUT = HEUREDEBUT;
         this.HEUREFIN = HEUREFIN;
@@ -47,28 +47,28 @@ public class Reservation {
     /**
      * @return the HEUREDEBUT
      */
-    public int getHEUREDEBUT() {
+    public String getHEUREDEBUT() {
         return HEUREDEBUT;
     }
 
     /**
      * @param HEUREDEBUT the HEUREDEBUT to set
      */
-    public void setHEUREDEBUT(int HEUREDEBUT) {
+    public void setHEUREDEBUT(String HEUREDEBUT) {
         this.HEUREDEBUT = HEUREDEBUT;
     }
 
     /**
      * @return the HEUREFIN
      */
-    public int getHEUREFIN() {
+    public String getHEUREFIN() {
         return HEUREFIN;
     }
 
     /**
      * @param HEUREFIN the HEUREFIN to set
      */
-    public void setHEUREFIN(int HEUREFIN) {
+    public void setHEUREFIN(String HEUREFIN) {
         this.HEUREFIN = HEUREFIN;
     }
 
@@ -141,6 +141,6 @@ public class Reservation {
     public void setTYPEACTIVITE(int TYPEACTIVITE) {
         this.TYPEACTIVITE = TYPEACTIVITE;
     }
-    
-    
+
+
 }

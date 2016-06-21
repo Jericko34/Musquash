@@ -100,8 +100,8 @@ public class Connexion {
         Statement requ = maconnec.createStatement();
         ResultSet request = null;
         String vDATERESERVATION;
-        int vHEUREDEBUT;
-        int vHEUREFIN;
+        String  vHEUREDEBUT;
+        String vHEUREFIN;
         int vIDPROF;
         int vIDRESERVATION;
         int vIDSALLE;
@@ -118,8 +118,8 @@ public class Connexion {
         while (request.next()) {
 
             vDATERESERVATION = request.getString(1);
-            vHEUREDEBUT = Integer.parseInt(request.getString(2));
-            vHEUREFIN = Integer.parseInt(request.getString(3));
+            vHEUREDEBUT = request.getString(2);
+            vHEUREFIN = request.getString(3);
             vIDPROF = Integer.parseInt(request.getString(4));
             vIDRESERVATION = Integer.parseInt(request.getString(5));
             vIDSALLE = Integer.parseInt(request.getString(6));
