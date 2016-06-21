@@ -70,7 +70,7 @@ public class Connexion {
         int vTELEPHONE;
         int vIDCLIENT;
         int vADHERENT;
-        
+        this.LancerLaConnexion();
         String a = "Select NOMCLIENT, PRENOMCLIENT, ADRESSE, TELEPHONE, IDCLIENT, ADHERENT FROM CLIENT";
 
         try {

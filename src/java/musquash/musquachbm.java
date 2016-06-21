@@ -29,7 +29,8 @@ public class musquachbm {
     public musquachbm() {
     }
 
-    public void initconnexion() {
+    public void RequeteClient() throws SQLException {
+        resultat = maconnexion.RequeteSelectClient();
     }
 
 
