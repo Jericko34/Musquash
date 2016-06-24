@@ -1,4 +1,4 @@
-package org.primefaces.showcase.view.data;
+package calendar;
  
 import java.io.Serializable;
 import java.text.ParseException;
