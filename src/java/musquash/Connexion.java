@@ -26,8 +26,8 @@ public class Connexion {
     }
 
     private Connection maconnec = null;
-    private List <Client> clients = new ArrayList<>();
-    private List <Reservation> reservations = new ArrayList<>();
+    private List<Client> clients = new ArrayList<>();
+    private List<Reservation> reservations = new ArrayList<>();
 
     public void LancerLaConnexion() {
         try {
@@ -88,17 +88,18 @@ public class Connexion {
             vTELEPHONE = Integer.parseInt(request.getString(4));
             vIDCLIENT = Integer.parseInt(request.getString(5));
             vADHERENT = Integer.parseInt(request.getString(6));
-            Client b = new Client (vNOMCLIENT, vPRENOMCLIENT, vADRESSE, vTELEPHONE, vIDCLIENT, vADHERENT);
+            Client b = new Client(vNOMCLIENT, vPRENOMCLIENT, vADRESSE, vTELEPHONE, vIDCLIENT, vADHERENT);
             clients.add(b);
-            
+
         }
         return clients;
     }
+
     public List<Reservation> RequeteSelectReservation() throws SQLException {
         Statement requ = maconnec.createStatement();
         ResultSet request = null;
         String vDATERESERVATION;
-        String  vHEUREDEBUT;
+        String vHEUREDEBUT;
         String vHEUREFIN;
         int vIDPROF;
         int vIDRESERVATION;
@@ -123,10 +124,48 @@ public class Connexion {
             vIDSALLE = Integer.parseInt(request.getString(6));
             vIDCOURCOLLECTIF = Integer.parseInt(request.getString(7));
             vTYPEACTIVITE = Integer.parseInt(request.getString(8));
-            Reservation b = new Reservation (vDATERESERVATION, vHEUREDEBUT, vHEUREFIN,vIDPROF,vIDRESERVATION,vIDSALLE,vIDCOURCOLLECTIF,vTYPEACTIVITE);
+            Reservation b = new Reservation(vDATERESERVATION, vHEUREDEBUT, vHEUREFIN, vIDPROF, vIDRESERVATION, vIDSALLE, vIDCOURCOLLECTIF, vTYPEACTIVITE);
             reservations.add(b);
-            
+
         }
         return reservations;
+    }
+
+    public void InsertionReservation(Reservation a) throws SQLException {
+        Statement requ = maconnec.createStatement();
+        ResultSet request = null;
+        String vDATERESERVATION = a.getDATE();
+        String vHEUREDEBUT = a.getHEUREDEBUT();
+        String vHEUREFIN = a.getHEUREFIN();
+        int vIDPROF = a.getIDPROF();
+        int vIDRESERVATION = a.getIDRESERVATION();
+        int vIDSALLE = a.getIDSALLE();
+        int vIDCOURCOLLECTIF = a.getIDCOURCOLLECTIF();
+        int vTYPEACTIVITE = a.getTYPEACTIVITE();
+        String req = "Insert into Reservation Values (" + vDATERESERVATION + ", " + vHEUREDEBUT + ", " + vHEUREFIN + ", " + vIDPROF + ", " + vIDRESERVATION + ", " + vIDSALLE + ", " + vIDCOURCOLLECTIF + ", " + vTYPEACTIVITE + ")";
+
+        try {
+            request = requ.executeQuery(req);
+        } catch (SQLException excep) {
+            excep.printStackTrace();
+        }
+    }
+
+    public void InsertionReservation(Client a) throws SQLException {
+        Statement requ = maconnec.createStatement();
+        ResultSet request = null;
+        String vNOMCLIENT = a.getNomClient();
+        String vPRENOMCLIENT = a.getPrenomClient();
+        String vADRESSE = a.getAdresse();
+        int vTELEPHONE = a.getTelephone();
+        int vIDCLIENT = a.getIdclient();
+        int vADHERENT = a.getAdherent();
+        String req = "Insert into Client Values (" + vNOMCLIENT + ", " + vPRENOMCLIENT + ", " + vADRESSE + ", " + vTELEPHONE + ", " + vIDCLIENT + ", " + vADHERENT + ")";
+
+        try {
+            request = requ.executeQuery(req);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
