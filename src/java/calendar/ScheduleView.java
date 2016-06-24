@@ -1,10 +1,15 @@
 package calendar;
+import classdb.Reservation;
+import musquash.musquachbm;
+
  
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -26,6 +31,10 @@ import org.primefaces.model.ScheduleModel;
 @ManagedBean
 @ViewScoped
 public class ScheduleView implements Serializable {
+    
+    public ScheduleView(){
+        
+    }
  
     private ScheduleModel eventModel;
      
@@ -33,8 +42,10 @@ public class ScheduleView implements Serializable {
  
     private ScheduleEvent event = new DefaultScheduleEvent();
     
+    private List<Reservation> reservations = new ArrayList<>();
     
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HHmm");
     
     private Date dateDeb;
     
@@ -42,8 +53,8 @@ public class ScheduleView implements Serializable {
     
     public void initDateTest(){
         try {
-            dateDeb=simpleDateFormat.parse("25/06/2016 09:30");
-            dateFin=simpleDateFormat.parse("25/06/2016 11:00");
+            dateDeb=simpleDateFormat.parse("25/06/2016 0930");
+            dateFin=simpleDateFormat.parse("25/06/2016 1100");
         } catch (ParseException ex) {
             Logger.getLogger(ScheduleView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -64,7 +75,21 @@ public class ScheduleView implements Serializable {
     public void init() {
         //initDate();
         initDateTest();
-        //parcoursListCours();
+        
+        for (int i = 0; i<reservations.size(); i++){
+            String dateD = reservations.get(i).getDATE() + " " + reservations.get(i).getHEUREDEBUT();
+            String dateF = reservations.get(i).getDATE() + " " + reservations.get(i).getHEUREFIN();
+            Date dateDebutR = new Date();
+            Date dateFinR = new Date();
+            try {
+                dateDebutR = simpleDateFormat.parse(dateD);
+                dateFinR = simpleDateFormat.parse(dateF);
+            } catch (ParseException ex) {
+                Logger.getLogger(ScheduleView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            eventModel.addEvent(new DefaultScheduleEvent("Réservé", dateDebutR, dateFinR));
+        }
+        
         eventModel = new DefaultScheduleModel();
         eventModel.addEvent(new DefaultScheduleEvent("Cours 1", dateDeb, dateFin));
         eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", previousDay8Pm(), previousDay11Pm()));
@@ -231,5 +256,19 @@ public class ScheduleView implements Serializable {
      
     private void addMessage(FacesMessage message) {
         FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    /**
+     * @return the reservations
+     */
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    /**
+     * @param reservations the reservations to set
+     */
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
     }
 }

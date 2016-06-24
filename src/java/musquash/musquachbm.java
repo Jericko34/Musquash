@@ -5,6 +5,8 @@
  */
 package musquash;
 
+import calendar.ScheduleView;
+
 import classdb.Client;
 import classdb.Reservation;
 import java.sql.SQLException;
@@ -24,11 +26,17 @@ public class musquachbm {
     private Connexion maconnexion = new Connexion();
     private List<Client> clients = new ArrayList<>();
     private List<Reservation> reservations = new ArrayList<>();
+    private ScheduleView calendrier = new ScheduleView();
 
     /**
      * Creates a new instance of musquachbm
      */
     public musquachbm() {
+    }
+    
+    public void setReservationsPlanning(){
+        
+        calendrier.setReservations(reservations);
     }
 
     public void lancerconnexion() {
