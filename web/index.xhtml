@@ -12,6 +12,7 @@
             <h:commandButton value="Connexion" action= "#{musquachbm.lancerconnexion()}"/>
             <h:commandButton value="Clients" action= "#{musquachbm.listedeclient()}"/>
             <h:commandButton value="Reservations" action= "#{musquachbm.listedereservation()}"/>
+                <h:commandButton value="Planning1" action= "#{musquachbm.setReservationsPlanning()}"></h:commandButton>
                 <h:commandButton value="Planning" action= "faces/calendrier"><f:actionListener binding="#{musquachbm.setReservationsPlanning()}" /></h:commandButton>
         </h:form>
         <h:form>

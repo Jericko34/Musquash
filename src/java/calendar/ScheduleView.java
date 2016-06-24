@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -29,7 +30,7 @@ import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
  
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class ScheduleView implements Serializable {
     
     public ScheduleView(){
@@ -76,9 +77,11 @@ public class ScheduleView implements Serializable {
         //initDate();
         initDateTest();
         
+        eventModel = new DefaultScheduleModel();
+        
         for (int i = 0; i<reservations.size(); i++){
-            String dateD = reservations.get(i).getDATE() + " " + reservations.get(i).getHEUREDEBUT();
-            String dateF = reservations.get(i).getDATE() + " " + reservations.get(i).getHEUREFIN();
+            String dateD = reservations.get(i).getDATE().substring(0, 10) + " " + reservations.get(i).getHEUREDEBUT();
+            String dateF = reservations.get(i).getDATE().substring(0, 10) + " " + reservations.get(i).getHEUREFIN();
             Date dateDebutR = new Date();
             Date dateFinR = new Date();
             try {
@@ -90,7 +93,7 @@ public class ScheduleView implements Serializable {
             eventModel.addEvent(new DefaultScheduleEvent("Réservé", dateDebutR, dateFinR));
         }
         
-        eventModel = new DefaultScheduleModel();
+        
         eventModel.addEvent(new DefaultScheduleEvent("Cours 1", dateDeb, dateFin));
         eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", previousDay8Pm(), previousDay11Pm()));
         eventModel.addEvent(new DefaultScheduleEvent("Birthday Party", today1Pm(), today6Pm()));

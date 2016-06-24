@@ -37,6 +37,7 @@ public class musquachbm {
     public void setReservationsPlanning(){
         
         calendrier.setReservations(reservations);
+        calendrier.init();
     }
 
     public void lancerconnexion() {
