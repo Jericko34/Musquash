@@ -11,19 +11,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author Benjamin
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class musquachbm {
 
     private Connexion maconnexion = new Connexion();
-    private List <Client> clients = new ArrayList<>();
-    private List <Reservation> reservations = new ArrayList<>();
+    private List<Client> clients = new ArrayList<>();
+    private List<Reservation> reservations = new ArrayList<>();
 
     /**
      * Creates a new instance of musquachbm
@@ -31,16 +31,19 @@ public class musquachbm {
     public musquachbm() {
     }
 
-    public void listedeclient() throws SQLException  {
+    public void lancerconnexion() {
+        maconnexion.LancerLaConnexion();
+    }
+
+    public void listedeclient() throws SQLException {
 
         setClients(maconnexion.RequeteSelectClient());
     }
-    
-    public void listedereservation() throws SQLException  {
+
+    public void listedereservation() throws SQLException {
 
         setReservations(maconnexion.RequeteSelectReservation());
     }
-
 
     /**
      * @return the maconnexion
@@ -59,43 +62,43 @@ public class musquachbm {
     /**
      * @return the resultat
      */
-    public List <Client> getResultat() {
+    public List<Client> getResultat() {
         return getClients();
     }
 
     /**
      * @param resultat the resultat to set
      */
-    public void setResultat(List <Client> resultat) {
+    public void setResultat(List<Client> resultat) {
         this.setClients(resultat);
     }
 
     /**
      * @return the clients
      */
-    public List <Client> getClients() {
+    public List<Client> getClients() {
         return clients;
     }
 
     /**
      * @param clients the clients to set
      */
-    public void setClients(List <Client> clients) {
+    public void setClients(List<Client> clients) {
         this.clients = clients;
     }
 
     /**
      * @return the reservations
      */
-    public List <Reservation> getReservations() {
+    public List<Reservation> getReservations() {
         return reservations;
     }
 
     /**
      * @param reservations the reservations to set
      */
-    public void setReservations(List <Reservation> reservations) {
+    public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
     }
-    
+
 }

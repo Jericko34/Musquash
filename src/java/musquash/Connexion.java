@@ -64,7 +64,6 @@ public class Connexion {
     }
 
     public List<Client> RequeteSelectClient() throws SQLException {
-        this.LancerLaConnexion();
         Statement requ = maconnec.createStatement();
         ResultSet request = null;
         String vNOMCLIENT;
@@ -96,7 +95,6 @@ public class Connexion {
         return clients;
     }
     public List<Reservation> RequeteSelectReservation() throws SQLException {
-        this.LancerLaConnexion();
         Statement requ = maconnec.createStatement();
         ResultSet request = null;
         String vDATERESERVATION;
