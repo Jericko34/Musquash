@@ -8,8 +8,9 @@
     <h:body>
         Hello from Facelets
         <h:form>
-            <h:commandButton value="Connexion" action= "#{musquachbm.initconnexion()}"/>
-            <h:commandButton value="Requete" action= "calendrier"/>
+            <h:commandButton value="Clients" action= "#{musquachbm.listedeclient()}"/>
+            <h:commandButton value="Reservations" action= "#{musquachbm.listedereservation()}"/>
+            <h:commandButton value="Test" action= "calendrier"/>
         </h:form>
         <h:form>
             <h:dataTable var="p" value="#{musquachbm.resultat}">
@@ -41,6 +42,43 @@
 
         </h:form>
         <br />
+        <h:form>
+            <h:dataTable var="q" value="#{musquachbm.reservations}">
+                <h:column>
+                    <h:outputText value="#{q.DATE}">
+                    </h:outputText>                        
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{q.HEUREDEBUT}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{q.HEUREFIN}">
+                    </h:outputText>                        
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{q.IDCOURCOLLECTIF}">
+                    </h:outputText>                        
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{q.IDPROF}">
+                    </h:outputText>                        
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{q.IDRESERVATION}">
+                    </h:outputText>                        
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{q.IDSALLE}">
+                    </h:outputText>                        
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{q.TYPEACTIVITE}">
+                    </h:outputText>                        
+                </h:column>
+            </h:dataTable>
+
+        </h:form>
     </h:body>
 </html>
 
