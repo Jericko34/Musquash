@@ -8,6 +8,7 @@
     <h:body>
         Hello from Facelets
         <h:form>
+            <h:commandButton value="Connexion" action= "#{musquachbm.lancerconnexion()}"/>
             <h:commandButton value="Clients" action= "#{musquachbm.listedeclient()}"/>
             <h:commandButton value="Reservations" action= "#{musquachbm.listedereservation()}"/>
             <h:commandButton value="Planning" action= "faces/calendrier"/>
