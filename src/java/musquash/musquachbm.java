@@ -133,34 +133,42 @@ public class musquachbm {
     private Date dateDeb;
     
     private Date dateFin;
+    
+    private String salle = "0";
  
     @PostConstruct
     public void init() {
         setEventModel(new DefaultScheduleModel());
         for (int i = 0; i<reservations.size(); i++){
-            String dateD = reservations.get(i).getDATE().substring(0, 10) + " " + reservations.get(i).getHEUREDEBUT();
-            String dateF = reservations.get(i).getDATE().substring(0, 10) + " " + reservations.get(i).getHEUREFIN();
-            Date dateDebutR = new Date();
-            Date dateFinR = new Date();
-            try {
-                dateDebutR = getSimpleDateFormat().parse(dateD);
-                dateFinR = getSimpleDateFormat().parse(dateF);
-            } catch (ParseException ex) {
-                Logger.getLogger(musquachbm.class.getName()).log(Level.SEVERE, null, ex);
+            if (!"0".equals(salle)){
+                if(reservations.get(i).getIDSALLE() == Integer.parseInt(salle)){
+                    String dateD = reservations.get(i).getDATE().substring(0, 10) + " " + reservations.get(i).getHEUREDEBUT();
+                    String dateF = reservations.get(i).getDATE().substring(0, 10) + " " + reservations.get(i).getHEUREFIN();
+                    Date dateDebutR = new Date();
+                    Date dateFinR = new Date();
+                    try {
+                        dateDebutR = getSimpleDateFormat().parse(dateD);
+                        dateFinR = getSimpleDateFormat().parse(dateF);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(musquachbm.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    getEventModel().addEvent(new DefaultScheduleEvent("Réservé", dateDebutR, dateFinR));
+                }
+            }else{
+                String dateD = reservations.get(i).getDATE().substring(0, 10) + " " + reservations.get(i).getHEUREDEBUT();
+                    String dateF = reservations.get(i).getDATE().substring(0, 10) + " " + reservations.get(i).getHEUREFIN();
+                    Date dateDebutR = new Date();
+                    Date dateFinR = new Date();
+                    try {
+                        dateDebutR = getSimpleDateFormat().parse(dateD);
+                        dateFinR = getSimpleDateFormat().parse(dateF);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(musquachbm.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    getEventModel().addEvent(new DefaultScheduleEvent("Réservé", dateDebutR, dateFinR));
             }
-            getEventModel().addEvent(new DefaultScheduleEvent("Réservé", dateDebutR, dateFinR));
         }
-        lazyEventModel = new LazyScheduleModel() {
-             
-            @Override
-            public void loadEvents(Date start, Date end) {
-                Date random = getRandomDate(start);
-                addEvent(new DefaultScheduleEvent("Lazy Event 1", random, random));
-                 
-                random = getRandomDate(start);
-                addEvent(new DefaultScheduleEvent("Lazy Event 2", random, random));
-            }   
-        };
+        
     }
      
     public Date getRandomDate(Date base) {
@@ -272,11 +280,23 @@ public class musquachbm {
     }
      
     public void addEvent(ActionEvent actionEvent) {
-        if(getEvent().getId() == null)
+        if(getEvent().getId() == null){
+            Reservation res = new Reservation(getEvent().getStartDate().toString().substring(0, 10), getEvent().getStartDate().toString().substring(11, 15), getEvent().getEndDate().toString().substring(11, 15), 1, 19999, Integer.parseInt(salle), 1, 1);
+            try {
+                maconnexion.InsertionReservation(res);
+            } catch (SQLException ex) {
+                Logger.getLogger(musquachbm.class.getName()).log(Level.SEVERE, null, ex);
+            }
             getEventModel().addEvent(getEvent());
-        else
+        }else{
+            Reservation res = new Reservation(getEvent().getStartDate().toString().substring(0, 10), getEvent().getStartDate().toString().substring(11, 15), getEvent().getEndDate().toString().substring(11, 15), 1, 19999, Integer.parseInt(salle), 1, 1);
+            try {
+                maconnexion.InsertionReservation(res);
+            } catch (SQLException ex) {
+                Logger.getLogger(musquachbm.class.getName()).log(Level.SEVERE, null, ex);
+            }
             getEventModel().updateEvent(getEvent());
-         
+        }
         setEvent(new DefaultScheduleEvent());
     }
      
@@ -353,4 +373,23 @@ public class musquachbm {
         this.dateFin = dateFin;
     }
 
+    /**
+     * @return the salle
+     */
+    public String getSalle() {
+        return salle;
+    }
+
+    /**
+     * @param salle the salle to set
+     */
+    public void setSalle(String salle) {
+        this.salle = salle;
+    }
+
+    
+    public void afficherSalle(){
+        getEventModel().clear();
+        init();
+    }
 }

@@ -142,7 +142,7 @@ public class Connexion {
         int vIDSALLE = a.getIDSALLE();
         int vIDCOURCOLLECTIF = a.getIDCOURCOLLECTIF();
         int vTYPEACTIVITE = a.getTYPEACTIVITE();
-        String req = "Insert into Reservation Values (" + vDATERESERVATION + ", " + vHEUREDEBUT + ", " + vHEUREFIN + ", " + vIDPROF + ", " + vIDRESERVATION + ", " + vIDSALLE + ", " + vIDCOURCOLLECTIF + ", " + vTYPEACTIVITE + ")";
+        String req = "Insert into Reservation Values (\'" + vDATERESERVATION + "\', \'" + vHEUREDEBUT + "\', \'" + vHEUREFIN + "\', " + vIDPROF + ", " + vIDRESERVATION + ", " + vIDSALLE + ", " + vIDCOURCOLLECTIF + ", " + vTYPEACTIVITE + ")";
 
         try {
             request = requ.executeQuery(req);
