@@ -2,18 +2,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Musquash - Planning</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        
         <h:form>
             <h:commandButton value="Connexion" action= "#{musquachbm.lancerconnexion()}"/>
             <h:commandButton value="Clients" action= "#{musquachbm.listedeclient()}"/>
             <h:commandButton value="Reservations" action= "#{musquachbm.listedereservation()}"/>
-                <h:commandButton value="Planning1" action= "#{musquachbm.setReservationsPlanning()}"></h:commandButton>
-                <h:commandButton value="Planning" action= "faces/calendrier"><f:actionListener binding="#{musquachbm.setReservationsPlanning()}" /></h:commandButton>
         </h:form>
         <h:form>
             <h:dataTable var="p" value="#{musquachbm.resultat}">
@@ -45,7 +44,7 @@
 
         </h:form>
         <br />
-        <h:form>
+        <!--<h:form>
             <h:dataTable var="q" value="#{musquachbm.reservations}">
                 <h:column>
                     <h:outputText value="#{q.DATE}">
@@ -81,7 +80,48 @@
                 </h:column>
             </h:dataTable>
 
-        </h:form>
+        </h:form>-->
+        <h:form>
+        <p:growl id="messages" showDetail="true" />
+
+        <h:panelGrid columnClasses="value">
+            <h3 style="margin-top: 0">Planning des reservations</h3>
+            <p:outputLabel for="basic" value="Salle:" />
+            <p:selectOneListbox id="basic" value="#{selectOneView.option}">
+                <f:selectItem itemLabel="Option 1" itemValue="1" />
+                <f:selectItem itemLabel="Option 2" itemValue="2" />
+                <f:selectItem itemLabel="Option 3" itemValue="3" />
+            </p:selectOneListbox>
+            <p:schedule id="schedule" value="#{musquachbm.eventModel}" widgetVar="myschedule" timeZone="GMT+2">
+
+                <p:ajax event="dateSelect" listener="#{musquachbm.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+                <p:ajax event="eventSelect" listener="#{musquachbm.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+                <p:ajax event="eventMove" listener="#{musquachbm.onEventMove}" update="messages" />
+                <p:ajax event="eventResize" listener="#{musquachbm.onEventResize}" update="messages" />
+
+            </p:schedule>
+
+        </h:panelGrid>
+
+        <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
+            <h:panelGrid id="eventDetails" columns="2">
+                <p:outputLabel for="title" value="Titles:" />
+                <p:inputText id="title" value="#{musquachbm.event.title}" required="true" />
+
+                <p:outputLabel for="from" value="From:" />
+                <p:calendar id="from" value="#{musquachbm.event.startDate}" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/>
+
+                <p:outputLabel for="to" value="To:" />
+                <p:calendar id="to" value="#{musquachbm.event.endDate}" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/>
+
+                <p:outputLabel for="allDay" value="All Day:" />
+                <h:selectBooleanCheckbox id="allDay" value="#{musquachbm.event.allDay}" />
+
+                <p:commandButton type="reset" value="Reset" />
+                <p:commandButton id="addButton" value="Save" actionListener="#{musquachbm.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+            </h:panelGrid>
+        </p:dialog>    
+    </h:form>
     </h:body>
 </html>
 

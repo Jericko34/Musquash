@@ -1,21 +1,21 @@
-package calendar;
-import classdb.Reservation;
-import musquash.musquachbm;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
+/**
+ *
+ * @author Darcel
+ */
+package org.primefaces.showcase.view.data;
  
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -30,75 +30,22 @@ import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
  
 @ManagedBean
-@SessionScoped
-public class ScheduleView implements Serializable {
-    
-    public ScheduleView(){
-        
-    }
+@ViewScoped
+public class calendar implements Serializable {
  
     private ScheduleModel eventModel;
      
     private ScheduleModel lazyEventModel;
  
     private ScheduleEvent event = new DefaultScheduleEvent();
-    
-    private List<Reservation> reservations = new ArrayList<>();
-    
-    
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HHmm");
-    
-    private Date dateDeb;
-    
-    private Date dateFin;
-    
-    public void initDateTest(){
-        try {
-            dateDeb=simpleDateFormat.parse("25/06/2016 0930");
-            dateFin=simpleDateFormat.parse("25/06/2016 1100");
-        } catch (ParseException ex) {
-            Logger.getLogger(ScheduleView.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    };
-    
-    public Date initDate(String dateVoulue, Date date){
-        try {
-            date=simpleDateFormat.parse(dateVoulue);
-        } catch (ParseException ex) {
-            Logger.getLogger(ScheduleView.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return date;
-    };
-    
-    /*public void 
-    */
+ 
     @PostConstruct
     public void init() {
-        //initDate();
-        initDateTest();
-        
         eventModel = new DefaultScheduleModel();
-        
-        for (int i = 0; i<reservations.size(); i++){
-            String dateD = reservations.get(i).getDATE().substring(0, 10) + " " + reservations.get(i).getHEUREDEBUT();
-            String dateF = reservations.get(i).getDATE().substring(0, 10) + " " + reservations.get(i).getHEUREFIN();
-            Date dateDebutR = new Date();
-            Date dateFinR = new Date();
-            try {
-                dateDebutR = simpleDateFormat.parse(dateD);
-                dateFinR = simpleDateFormat.parse(dateF);
-            } catch (ParseException ex) {
-                Logger.getLogger(ScheduleView.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            eventModel.addEvent(new DefaultScheduleEvent("Réservé", dateDebutR, dateFinR));
-        }
-        
-        
-        eventModel.addEvent(new DefaultScheduleEvent("Cours 1", dateDeb, dateFin));
         eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", previousDay8Pm(), previousDay11Pm()));
         eventModel.addEvent(new DefaultScheduleEvent("Birthday Party", today1Pm(), today6Pm()));
         eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys", nextDay9Am(), nextDay11Am()));
-        //eventModel.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(), fourDaysLater3pm()));
+        eventModel.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(), fourDaysLater3pm()));
          
         lazyEventModel = new LazyScheduleModel() {
              
@@ -139,13 +86,6 @@ public class ScheduleView implements Serializable {
     private Calendar today() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 0, 0, 0);
- 
-        return calendar;
-    }
-    
-    private Calendar myDate(Date myDate) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(myDate);
  
         return calendar;
     }
@@ -259,19 +199,5 @@ public class ScheduleView implements Serializable {
      
     private void addMessage(FacesMessage message) {
         FacesContext.getCurrentInstance().addMessage(null, message);
-    }
-
-    /**
-     * @return the reservations
-     */
-    public List<Reservation> getReservations() {
-        return reservations;
-    }
-
-    /**
-     * @param reservations the reservations to set
-     */
-    public void setReservations(List<Reservation> reservations) {
-        this.reservations = reservations;
     }
 }
