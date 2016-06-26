@@ -127,10 +127,10 @@
                 <p:inputText id="title" value="#{musquachbm.event.title}" required="true" />
 
                 <p:outputLabel for="from" value="From:" />
-                <p:calendar id="from" value="#{musquachbm.event.startDate}" timeZone="GMT+2" pattern="dd/MM/yy HHmm"/>
+                <p:calendar id="from" value="#{musquachbm.event.startDate}" timeZone="GMT+2" pattern="yyyy-MM-dd HHmm"/>
 
                 <p:outputLabel for="to" value="To:" />
-                <p:calendar id="to" value="#{musquachbm.event.endDate}" timeZone="GMT+2" pattern="dd/MM/yy HHmm"/>
+                <p:calendar id="to" value="#{musquachbm.event.endDate}" timeZone="GMT+2" pattern="yyyy-MM-dd HHmm"/>
 
                 <p:outputLabel for="allDay" value="All Day:" />
                 <h:selectBooleanCheckbox id="allDay" value="#{musquachbm.event.allDay}" />

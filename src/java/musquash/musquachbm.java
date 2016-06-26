@@ -44,6 +44,7 @@ public class musquachbm {
     private Connexion maconnexion = new Connexion();
     private List<Client> clients = new ArrayList<>();
     private List<Reservation> reservations = new ArrayList<>();
+    public List<Reservation> reser;
 
     /**
      * Creates a new instance of musquachbm
@@ -63,7 +64,7 @@ public class musquachbm {
     public void listedereservation() throws SQLException {
         eventModel.clear();
         setReservations(new ArrayList<>());
-        List<Reservation> reser = new ArrayList<>();
+        reser = new ArrayList<>();
         reser = maconnexion.RequeteSelectReservation();
         setReservations(reser);
         init();
@@ -132,13 +133,13 @@ public class musquachbm {
  
     private ScheduleEvent event = new DefaultScheduleEvent();
     
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yy HHmm");
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HHmm");
     
     private Date dateDeb;
     
     private Date dateFin;
     
-    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy");
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     
     private String salle = "0";
  
