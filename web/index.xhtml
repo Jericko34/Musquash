@@ -13,6 +13,7 @@
             <h:commandButton value="Connexion" action= "#{musquachbm.lancerconnexion()}"/>
             <h:commandButton value="Clients" action= "#{musquachbm.listedeclient()}"/>
             <h:commandButton value="Reservations" action= "#{musquachbm.listedereservation()}"/>
+            <h:commandButton value="Inscription User" action= "faces/newUser"/>
         </h:form>
         <h:form>
             <h:dataTable var="p" value="#{musquachbm.resultat}">
