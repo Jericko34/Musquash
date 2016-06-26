@@ -61,8 +61,12 @@ public class musquachbm {
     }
 
     public void listedereservation() throws SQLException {
-
-        setReservations(maconnexion.RequeteSelectReservation());
+        eventModel.clear();
+        setReservations(new ArrayList<>());
+        List<Reservation> reser = new ArrayList<>();
+        reser = maconnexion.RequeteSelectReservation();
+        setReservations(reser);
+        init();
     }
 
     /**
@@ -128,11 +132,13 @@ public class musquachbm {
  
     private ScheduleEvent event = new DefaultScheduleEvent();
     
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HHmm");
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yy HHmm");
     
     private Date dateDeb;
     
     private Date dateFin;
+    
+    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy");
     
     private String salle = "0";
  
@@ -281,7 +287,7 @@ public class musquachbm {
      
     public void addEvent(ActionEvent actionEvent) {
         if(getEvent().getId() == null){
-            Reservation res = new Reservation(getEvent().getStartDate().toString().substring(0, 10), getEvent().getStartDate().toString().substring(11, 15), getEvent().getEndDate().toString().substring(11, 15), 1, 19999, Integer.parseInt(salle), 1, 1);
+            Reservation res = new Reservation(format.format(getEvent().getStartDate()), getEvent().getStartDate().toString().substring(11, 16).replace(":", ""), getEvent().getEndDate().toString().substring(11, 16).replace(":", ""), 1, 19999, Integer.parseInt(salle), 1, 1);
             try {
                 maconnexion.InsertionReservation(res);
             } catch (SQLException ex) {
@@ -289,7 +295,7 @@ public class musquachbm {
             }
             getEventModel().addEvent(getEvent());
         }else{
-            Reservation res = new Reservation(getEvent().getStartDate().toString().substring(0, 10), getEvent().getStartDate().toString().substring(11, 15), getEvent().getEndDate().toString().substring(11, 15), 1, 19999, Integer.parseInt(salle), 1, 1);
+            Reservation res = new Reservation(getEvent().getStartDate().toString().substring(0, 10), getEvent().getStartDate().toString().substring(11, 16), getEvent().getEndDate().toString().substring(11, 16), 1, 19999, Integer.parseInt(salle), 1, 1);
             try {
                 maconnexion.InsertionReservation(res);
             } catch (SQLException ex) {
@@ -391,5 +397,128 @@ public class musquachbm {
     public void afficherSalle(){
         getEventModel().clear();
         init();
+    }
+    
+    private String nom;
+    private String prenom;
+    private String adresse;
+    private int telephone;
+    private int id;
+    private int numero;
+
+    /**
+     * @return the nom
+     */
+    public String getNom() {
+        return nom;
+    }
+
+    /**
+     * @param nom the nom to set
+     */
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    /**
+     * @return the prenom
+     */
+    public String getPrenom() {
+        return prenom;
+    }
+
+    /**
+     * @param prenom the prenom to set
+     */
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    /**
+     * @return the adresse
+     */
+    public String getAdresse() {
+        return adresse;
+    }
+
+    /**
+     * @param adresse the adresse to set
+     */
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    /**
+     * @return the telephone
+     */
+    public int getTelephone() {
+        return telephone;
+    }
+
+    /**
+     * @param telephone the telephone to set
+     */
+    public void setTelephone(int telephone) {
+        this.telephone = telephone;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the numero
+     */
+    public int getNumero() {
+        return numero;
+    }
+
+    /**
+     * @param numero the numero to set
+     */
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+    
+    public void save(){
+        maconnexion.LancerLaConnexion();
+        Client cli = new Client(nom, prenom, adresse, telephone, id, numero);
+        if (!this.nom.isEmpty() && !this.prenom.isEmpty() && !this.adresse.isEmpty()){
+            try {
+                maconnexion.InsertionReservation(cli);
+            } catch (SQLException ex) {
+                Logger.getLogger(musquachbm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    public void afficherInscri(){
+        setCache("");
+    }
+    
+    private String cache = "display: none;";
+
+    /**
+     * @return the cache
+     */
+    public String getCache() {
+        return cache;
+    }
+
+    /**
+     * @param cache the cache to set
+     */
+    public void setCache(String cache) {
+        this.cache = cache;
     }
 }

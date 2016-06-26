@@ -113,7 +113,7 @@ public class Connexion {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        reservations = new ArrayList<>();
         while (request.next()) {
 
             vDATERESERVATION = request.getString(1);
@@ -142,7 +142,7 @@ public class Connexion {
         int vIDSALLE = a.getIDSALLE();
         int vIDCOURCOLLECTIF = a.getIDCOURCOLLECTIF();
         int vTYPEACTIVITE = a.getTYPEACTIVITE();
-        String req = "insert into RESERVATION (DATERESERVATION,HEUREDEBUT,HEUREFIN, IDPROF,IDRESERVATION, IDSALLE, IDCOURCOLLECTIF, TYPEACTIVITE) VALUES (TO_DATE('"+vDATERESERVATION+"','YYYY/MM/DD'), " + vHEUREDEBUT + ", " + vHEUREFIN + ", " + Integer.toString(vIDPROF)+ ", " + Integer.toString(vIDRESERVATION) + ", " + Integer.toString(vIDSALLE) + ", " + Integer.toString(vIDCOURCOLLECTIF)  + ", " + Integer.toString(vTYPEACTIVITE) + ");";
+        String req = "insert into RESERVATION (DATERESERVATION,HEUREDEBUT,HEUREFIN, IDPROF,IDRESERVATION, IDSALLE, IDCOURCOLLECTIF, TYPEACTIVITE) VALUES ('"+vDATERESERVATION+"', " + vHEUREDEBUT + ", " + vHEUREFIN + ", " + Integer.toString(vIDPROF)+ ", " + Integer.toString(vIDRESERVATION) + ", " + Integer.toString(vIDSALLE) + ", " + Integer.toString(vIDCOURCOLLECTIF)  + ", " + Integer.toString(vTYPEACTIVITE) + ");";
 
         try {
             request = requ.executeQuery(req);
@@ -160,7 +160,7 @@ public class Connexion {
         int vTELEPHONE = a.getTelephone();
         int vIDCLIENT = a.getIdclient();
         int vADHERENT = a.getAdherent();
-        String req = "Insert into Client Values (" + vNOMCLIENT + ", " + vPRENOMCLIENT + ", " + vADRESSE + ", " + vTELEPHONE + ", " + vIDCLIENT + ", " + vADHERENT + ")";
+        String req = "Insert into Client Values ('" + vNOMCLIENT + "', '" + vPRENOMCLIENT + "', '" + vADRESSE + "', " + vTELEPHONE + ", " + vIDCLIENT + ", " + vADHERENT + ")";
 
         try {
             request = requ.executeQuery(req);

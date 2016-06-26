@@ -13,7 +13,7 @@
             <h:commandButton value="Connexion" action= "#{musquachbm.lancerconnexion()}"/>
             <h:commandButton value="Clients" action= "#{musquachbm.listedeclient()}"/>
             <h:commandButton value="Reservations" action= "#{musquachbm.listedereservation()}"/>
-            <h:commandButton value="Inscription User" action= "faces/newUser"/>
+            <h:commandButton value="Inscription" action= "#{musquachbm.afficherInscri()}"/>
         </h:form>
         <h:form>
             <h:dataTable var="p" value="#{musquachbm.resultat}">
@@ -127,10 +127,10 @@
                 <p:inputText id="title" value="#{musquachbm.event.title}" required="true" />
 
                 <p:outputLabel for="from" value="From:" />
-                <p:calendar id="from" value="#{musquachbm.event.startDate}" timeZone="GMT+2" pattern="yyyy-MM-dd HHmm"/>
+                <p:calendar id="from" value="#{musquachbm.event.startDate}" timeZone="GMT+2" pattern="dd/MM/yy HHmm"/>
 
                 <p:outputLabel for="to" value="To:" />
-                <p:calendar id="to" value="#{musquachbm.event.endDate}" timeZone="GMT+2" pattern="yyyy-MM-dd HHmm"/>
+                <p:calendar id="to" value="#{musquachbm.event.endDate}" timeZone="GMT+2" pattern="dd/MM/yy HHmm"/>
 
                 <p:outputLabel for="allDay" value="All Day:" />
                 <h:selectBooleanCheckbox id="allDay" value="#{musquachbm.event.allDay}" />
@@ -140,6 +140,50 @@
             </h:panelGrid>
         </p:dialog>    
     </h:form>
+        <h:form id="form">
+            <p:panel id="panel" header="Form" style="margin-bottom:10px; #{musquachbm.cache}">
+                <h:panelGrid columns="3" cellpadding="5">
+                    <p:outputLabel value="Nom :" />
+                    <p:inputText id="text1" value="#{musquachbm.nom}" required="true" label="Firstname">
+                        <f:validateLength minimum="2" />
+                    </p:inputText>
+                    
+                    <p:outputLabel value=" " />
+
+                    <p:outputLabel value="Prenom :" />
+                    <p:inputText id="text2" value="#{musquachbm.prenom}" required="true" label="Surname"/>
+                    
+                    <p:outputLabel value=" " />
+                    
+                    <p:outputLabel value="Adresse :" />
+                    <p:inputText id="text3" value="#{musquachbm.adresse}" required="true" label="Surname"/>
+                    
+                    <p:outputLabel value=" " />
+                    
+                    <p:outputLabel value="Telephone :" />
+                    <p:inputText id="text4" value="#{musquachbm.telephone}" required="true" label="Surname"/>
+                    
+                    <p:outputLabel value=" " />
+                    
+                    <p:outputLabel value="ID :" />
+                    <p:inputText id="text6" value="#{musquachbm.id}" required="true" label="Surname"/>
+                    
+                    <p:outputLabel value=" " />
+                    
+                    <p:outputLabel value="Numero Adherent :" />
+                    <p:inputText id="text7" value="#{musquachbm.numero}" required="true" label="Surname"/>
+                    
+                </h:panelGrid>
+            </p:panel>
+
+            <p:toolbar style="#{musquachbm.cache}">
+                <f:facet name="left">
+                    
+                <h:commandButton value="Reservations" action= "#{musquachbm.save()}"/>
+                </f:facet>
+            </p:toolbar>
+        </h:form>
+        
     </h:body>
 </html>
 
