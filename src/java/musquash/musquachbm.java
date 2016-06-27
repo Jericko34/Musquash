@@ -396,7 +396,6 @@ public class musquachbm {
 
     
     public void afficherSalle(){
-        getEventModel().clear();
         init();
     }
     
