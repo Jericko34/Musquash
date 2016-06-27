@@ -112,7 +112,7 @@
 
         <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
             <h:panelGrid id="eventDetails" columns="2">
-                <p:outputLabel for="title" value="Titles:" />
+                <p:outputLabel for="title" value="Activite : " />
                 <p:inputText id="title" value="#{musquachbm.event.title}" required="true" />
 
                 <p:outputLabel for="from" value="From:" />
@@ -154,12 +154,8 @@
                     
                     <p:outputLabel value=" " />
                     
-                    <p:outputLabel value="ID :" />
-                    <p:inputText id="text6" value="#{musquachbm.id}" required="true" label="Surname"/>
                     
-                    <p:outputLabel value=" " />
-                    
-                    <p:outputLabel value="Numero Adherent :" />
+                    <p:outputLabel value="Numero Adherent (0/1) :" />
                     <p:inputText id="text7" value="#{musquachbm.numero}" required="true" label="Surname"/>
                     
                 </h:panelGrid>

@@ -158,9 +158,8 @@ public class Connexion {
         String vPRENOMCLIENT = a.getPrenomClient();
         String vADRESSE = a.getAdresse();
         int vTELEPHONE = a.getTelephone();
-        int vIDCLIENT = a.getIdclient();
         int vADHERENT = a.getAdherent();
-        String req = "Insert into Client Values ('" + vNOMCLIENT + "', '" + vPRENOMCLIENT + "', '" + vADRESSE + "', " + vTELEPHONE + ", " + vIDCLIENT + ", " + vADHERENT + ")";
+        String req = "Insert into Client (NOMCLIENT, PRENOMCLIENT, ADRESSE, TELEPHONE, ADHERENT) Values ('" + vNOMCLIENT + "', '" + vPRENOMCLIENT + "', '" + vADRESSE + "', " + vTELEPHONE + ", " + vADHERENT + ")";
 
         try {
             request = requ.executeQuery(req);

@@ -288,7 +288,7 @@ public class musquachbm {
      
     public void addEvent(ActionEvent actionEvent) {
         if(getEvent().getId() == null){
-            Reservation res = new Reservation(format.format(getEvent().getStartDate()), getEvent().getStartDate().toString().substring(11, 16).replace(":", ""), getEvent().getEndDate().toString().substring(11, 16).replace(":", ""), 1, 19999, Integer.parseInt(salle), 1, 1);
+            Reservation res = new Reservation(format.format(getEvent().getStartDate()), getEvent().getStartDate().toString().substring(11, 16).replace(":", ""), getEvent().getEndDate().toString().substring(11, 16).replace(":", ""), 1, 19999, Integer.parseInt(salle), 1, Integer.parseInt(getEvent().getTitle()));
             try {
                 maconnexion.InsertionReservation(res);
             } catch (SQLException ex) {
@@ -403,7 +403,6 @@ public class musquachbm {
     private String prenom;
     private String adresse;
     private int telephone;
-    private int id;
     private int numero;
 
     /**
@@ -463,20 +462,6 @@ public class musquachbm {
     }
 
     /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /**
      * @return the numero
      */
     public int getNumero() {
@@ -492,7 +477,7 @@ public class musquachbm {
     
     public void save(){
         maconnexion.LancerLaConnexion();
-        Client cli = new Client(nom, prenom, adresse, telephone, id, numero);
+        Client cli = new Client(nom, prenom, adresse, telephone, 1, numero);
         if (!this.nom.isEmpty() && !this.prenom.isEmpty() && !this.adresse.isEmpty()){
             try {
                 maconnexion.InsertionReservation(cli);
